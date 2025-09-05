@@ -116,6 +116,7 @@ module "notifications" {
 | notifications_teams_webhook_url   | Teams Webhook endpoint for log notifications      | `string` | `""`     | no       |
 | alarms_teams_webhook_url          | Teams Webhook endpoint for alarm notifications    | `string` | `""`     | no       |
 | sns_topic_arn                     | ARN of an existing SNS Topic for sending messages | `string` | `""`     | no       |
+| tags                              | A map of tags to assign to resources.             | `map`    | `{}`     | no       |
 
 
 
