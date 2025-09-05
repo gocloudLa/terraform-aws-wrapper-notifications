@@ -1,0 +1,29 @@
+# EVENT
+{
+  "awslogs": {
+    "data": "H4sIAAAAAAAA/7WSX2/TMBTFv4plHnhpEsdxHCdPVFo3xj+VdRISZEJOctu6OLGx3a5j2ndHyTYEQjDxgB/PPfdc2797i3vwXm7g8sYCrvDJ/HL++e1itZqfLfAMm+sBHK4wFVlRFCJnKUvxDGuzOXNmb3GFE3ntE2h94o4h6uAQtcZBJK26t62CA9njCo8WaW0Ca1asGbCyKYEJQqRsc9JQztqSckY4nmG/b3zrlA3KDKdKB3AeV5/wYIJaq1aOssdXU/ziAEMYq7dYdbjCmSA8Lwoq8oyXjNCCCp4KnjJeFCllrCw4zQhjosh5XuYkFbxkPB+nBtWDD7K3uEoLwksqqCgzkc0efwhX+LbGL374alzVmBLKIkIjkl0SWjFWsTLOBP1Y41mNNRxAT7YP84t3k+TN3rVwqjRM+vmggpJafZONhqUzjYb+pRw6DS7eyYOseHmfZDYbcFPL8uR0KZ0Hh/5+pj6ruqmpl2qYhIe3TOIr+vq8lxu4ANmBQ4MJSBvZQRejV8vFGSWEoLXS4NG10nqqN4CsMy14D11c18MKAG1DsL5KEtutG3OMpZXtFmLjNgmNSdKBhaGDoVXg423o9bOdVJEa50bK1PWwNg6ZibXU6Bd3XQ81vsN3s9/gcpayIhWUEEa4ELQoWZ7SLMtEXhZpKnLOS1EwkZGckfJPcHOS/zvcnLD/CHf1/o0KkD0J+Gm4xm3iIzgl9XOP/FetAkS7rmmR8j+TruthqUH6ietBdYDCFtBOOmQGdGP2DrVaem9l2KJgkB0v9hB3vxuPWxDUFxlNZecTa/r42Gs0sh3zWuMctAEdwHllhnjCenX3HUwQFHB9BAAA"
+  }
+}
+
+# DECOMPOSED DEBUG
+Event Data: {
+  "messageType": "DATA_MESSAGE",
+  "owner": "283777854141",
+  "logGroup": "/aws/ecs/rxt-dev-core-api",
+  "logStream": "ecs/app/ef47f4e49b9e4800aac50b264c926406",
+  "subscriptionFilters": [
+    "notifications"
+  ],
+  "logEvents": [
+    {
+      "id": "38065772853694027286186146771244976230448756595018694656",
+      "timestamp": 1706928289383,
+      "message": "{\"@timestamp\":\"2024-02-03T02:44:49.382Z\",\"level\":\"WARN\",\"sourceFile\":\"InitializableProblemHandler.java:69\",\"logger\":\"PDFParser                               \",\"pid\":\"main\",\"message\":\"J2KImageReader not loaded. JPEG2000 files will not be processed.\\nSee https://pdfbox.apache.org/2.0/dependencies.html#jai-image-io\\nfor optional dependencies.\\n\"}"
+    },
+    {
+      "id": "38065772856414718200406882794512333859711856698748305409",
+      "timestamp": 1706928289505,
+      "message": "{\"@timestamp\":\"2024-02-03T02:44:49.504Z\",\"level\":\"WARN\",\"sourceFile\":\"InitializableProblemHandler.java:69\",\"logger\":\"SQLite3Parser                           \",\"pid\":\"main\",\"message\":\"org.xerial's sqlite-jdbc is not loaded.\\nPlease provide the jar on your classpath to parse sqlite files.\\nSee tika-parsers/pom.xml for the correct version.\"}"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+    "Records": [
+      {
+        "EventSource": "aws:sns",
+        "EventVersion": "1.0",
+        "EventSubscriptionArn": "arn:aws:sns:us-east-1:565219270600:dmc-prd-alerts:5578b1d1-a18a-4b75-ab5e-49d53168c106",
+        "Sns": {
+          "Type": "Notification",
+          "MessageId": "8858f990-4dfe-5f64-beeb-9914e9695e01",
+          "TopicArn": "arn:aws:sns:us-east-1:565219270600:dmc-prd-alerts",
+          "Subject": null,
+          "Message": "{\"version\":\"0\",\"id\":\"21603a51-738e-6389-2d5f-679a8a5daad8\",\"detail-type\":\"ECS Task State Change\",\"source\":\"aws.ecs\",\"account\":\"565219270600\",\"time\":\"2025-04-24T20:43:03Z\",\"region\":\"us-east-1\",\"resources\":[\"arn:aws:ecs:us-east-1:565219270600:task/dmc-prd-example-00/ea1746db211d4df7a3e75aa1c8d745b1\"],\"detail\":{\"attachments\":[{\"id\":\"2e920d6e-8092-4ab5-a222-3357f4c3de77\",\"type\":\"elb\",\"status\":\"DELETED\",\"details\":[]},{\"id\":\"804ab255-36b9-4b8d-9b5f-4bbed9d3dbb0\",\"type\":\"eni\",\"status\":\"DELETED\",\"details\":[{\"name\":\"subnetId\",\"value\":\"subnet-0f7af57f2990dac29\"},{\"name\":\"networkInterfaceId\",\"value\":\"eni-0b101d86877dc48d6\"},{\"name\":\"macAddress\",\"value\":\"0e:c1:0d:25:79:e3\"},{\"name\":\"privateDnsName\",\"value\":\"ip-10-160-10-172.ec2.internal\"},{\"name\":\"privateIPv4Address\",\"value\":\"10.160.10.172\"}]}],\"attributes\":[{\"name\":\"ecs.cpu-architecture\",\"value\":\"x86_64\"}],\"availabilityZone\":\"us-east-1a\",\"capacityProviderName\":\"FARGATE_SPOT\",\"clusterArn\":\"arn:aws:ecs:us-east-1:565219270600:cluster/dmc-prd-example-00\",\"connectivity\":\"CONNECTED\",\"connectivityAt\":\"2025-04-24T18:40:45.962Z\",\"containers\":[{\"containerArn\":\"arn:aws:ecs:us-east-1:565219270600:container/dmc-prd-example-00/ea1746db211d4df7a3e75aa1c8d745b1/202711a5-422c-4058-982d-320cd47b4c0c\",\"exitCode\":137,\"lastStatus\":\"STOPPED\",\"name\":\"app\",\"image\":\"public.ecr.aws/docker/library/nginx:latest\",\"imageDigest\":\"sha256:5ed8fcc66f4ed123c1b2560ed708dc148755b6e4cbd8b943fab094f2c6bfa91e\",\"runtimeId\":\"ea1746db211d4df7a3e75aa1c8d745b1-0527074092\",\"taskArn\":\"arn:aws:ecs:us-east-1:565219270600:task/dmc-prd-example-00/ea1746db211d4df7a3e75aa1c8d745b1\",\"networkInterfaces\":[{\"attachmentId\":\"804ab255-36b9-4b8d-9b5f-4bbed9d3dbb0\",\"privateIpv4Address\":\"10.160.10.172\"}],\"cpu\":\"0\",\"managedAgents\":[{\"name\":\"ExecuteCommandAgent\",\"status\":\"STOPPED\"}]}],\"cpu\":\"1024\",\"createdAt\":\"2025-04-24T18:40:40.494Z\",\"desiredStatus\":\"STOPPED\",\"enableExecuteCommand\":true,\"ephemeralStorage\":{\"sizeInGiB\":20},\"executionStoppedAt\":\"2025-04-24T20:37:11.254Z\",\"group\":\"service:dmc-prd-example-ExAlarms\",\"launchType\":\"FARGATE\",\"lastStatus\":\"STOPPED\",\"memory\":\"2048\",\"overrides\":{\"containerOverrides\":[{\"name\":\"app\"}]},\"platformVersion\":\"1.4.0\",\"pullStartedAt\":\"2025-04-24T18:40:56.313Z\",\"pullStoppedAt\":\"2025-04-24T18:41:00.724Z\",\"startedAt\":\"2025-04-24T18:41:10.115Z\",\"startedBy\":\"ecs-svc/0496062827991371528\",\"stoppingAt\":\"2025-04-24T20:37:21.295Z\",\"stoppedAt\":\"2025-04-24T20:43:03.024Z\",\"stoppedReason\":\"Essential container in task exited\",\"stopCode\":\"EssentialContainerExited\",\"taskArn\":\"arn:aws:ecs:us-east-1:565219270600:task/dmc-prd-example-00/ea1746db211d4df7a3e75aa1c8d745b1\",\"taskDefinitionArn\":\"arn:aws:ecs:us-east-1:565219270600:task-definition/dmc-prd-example-ExAlarms:3\",\"updatedAt\":\"2025-04-24T20:43:03.024Z\",\"version\":8}}",
+          "Timestamp": "2025-04-24T20:43:03.168Z",
+          "SignatureVersion": "1",
+          "Signature": "mM70q4uCDnxgt06wzse3M5lEqgl/qkNsDscfjVcmQZsrBoqkRqu6vkUG7MQmu8LePR4LZcB7qKppnjrzyj/Yqn/ktmx3vmrc/vF+P6qON6DrWIy+VmvDlkiN536paD4bA55pCtCqN1kW3rHDy8L4MO+pVXhkIs71nJQUDo6Tsa+sT1jIsm6PPiD2xD/l+cua0uda4d/Q9hz5Lw2Ju/uOhQixQLbl0/hJoT8TAo4eM3ECGvD1nz6lTbXm2ajuOgIwknhsQ4aK9iw4WFC+GFIBpWK8CQRQDlQW+eOwQ3hxM2i/sFr8ZHOqdii29ezHyq4un+5jZpbAmYX7PKvz8rpkYA==",
+          "SigningCertUrl": "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-9c6465fa7f48f5cacd23014631ec1136.pem",
+          "UnsubscribeUrl": "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:565219270600:dmc-prd-alerts:5578b1d1-a18a-4b75-ab5e-49d53168c106",
+          "MessageAttributes": {}
+        }
+      }
+    ]
+  }
+  

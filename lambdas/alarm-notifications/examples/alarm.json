@@ -1,0 +1,22 @@
+{
+    "Records": [
+      {
+        "EventSource": "aws:sns",
+        "EventVersion": "1.0",
+        "EventSubscriptionArn": "arn:aws:sns:us-east-1:565219270600:dmc-prd-alerts:5578b1d1-a18a-4b75-ab5e-49d53168c106",
+        "Sns": {
+          "Type": "Notification",
+          "MessageId": "1c22de5b-3149-5412-8f57-be2356cbe0f3",
+          "TopicArn": "arn:aws:sns:us-east-1:565219270600:dmc-prd-alerts",
+          "Subject": "ALARM: \"CRIT-ECS-CPUUtilization-dmc-prd-example-ExAlarms\" in US East (N. Virginia)",
+          "Message": "{\"AlarmName\":\"CRIT-ECS-CPUUtilization-dmc-prd-example-ExAlarms\",\"AlarmDescription\":\"CRIT service[ExAlarms] is using more than 80% of CPU\",\"AWSAccountId\":\"565219270600\",\"AlarmConfigurationUpdatedTimestamp\":\"2025-04-15T13:54:27.927+0000\",\"NewStateValue\":\"ALARM\",\"NewStateReason\":\"Threshold Crossed: 5 datapoints were greater than or equal to the threshold (2.0E-6). The most recent datapoints which crossed the threshold: [0.005052388024826844 (15/04/25 13:52:00), 0.005267754662781954 (15/04/25 13:51:00), 0.005740665597841144 (15/04/25 13:50:00), 0.007658930495381355 (15/04/25 13:49:00), 0.005654877905423443 (15/04/25 13:48:00)].\",\"StateChangeTime\":\"2025-04-15T13:55:14.533+0000\",\"Region\":\"US East (N. Virginia)\",\"AlarmArn\":\"arn:aws:cloudwatch:us-east-1:565219270600:alarm:CRIT-ECS-CPUUtilization-dmc-prd-example-ExAlarms\",\"OldStateValue\":\"OK\",\"OKActions\":[\"arn:aws:sns:us-east-1:565219270600:dmc-prd-alerts\"],\"AlarmActions\":[\"arn:aws:sns:us-east-1:565219270600:dmc-prd-alerts\"],\"InsufficientDataActions\":[],\"Trigger\":{\"MetricName\":\"CPUUtilization\",\"Namespace\":\"AWS/ECS\",\"StatisticType\":\"Statistic\",\"Statistic\":\"AVERAGE\",\"Unit\":\"Percent\",\"Dimensions\":[{\"value\":\"dmc-prd-example-ExAlarms\",\"name\":\"ServiceName\"},{\"value\":\"dmc-prd-example-00\",\"name\":\"ClusterName\"}],\"Period\":60,\"EvaluationPeriods\":5,\"ComparisonOperator\":\"GreaterThanOrEqualToThreshold\",\"Threshold\":2.0E-6,\"TreatMissingData\":\"notBreaching\",\"EvaluateLowSampleCountPercentile\":\"\"}}",
+          "Timestamp": "2025-04-15T13:55:14.576Z",
+          "SignatureVersion": "1",
+          "Signature": "PJ98XcCCjfDVh1Hg+XuNhE7BjsGI2+hRS7iJt5DyA6FXVckgiGrfKaSKJvPkSJP3xXvLTZ02WejGx2zI0pBH+sUXCOfvXedID3Mfrw4r+JVU051UAnzqN18p+4u+a7EeKG+FxCRRSm3ZfpBydQ9KM6LWLmfbO4o3w8vGTnNKNGMC9jU4Nh24g/3uq5LhIvBhb/YzTVYeVau6zSyYxvwvIqWilshnjDxJefHOL6yyetsPWG5El0VTKuisi8GzX4FHdTnz3PBKiYVPuhjfRbr3W+xfBvL4kU9RhcJDgMRiV3H2ca3iGT6joMq9alzv5ZoKrgsllrL5M74K98p9woKzLw==",
+          "SigningCertUrl": "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-9c6465fa7f48f5cacd23014631ec1136.pem",
+          "UnsubscribeUrl": "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:565219270600:dmc-prd-alerts:5578b1d1-a18a-4b75-ab5e-49d53168c106",
+          "MessageAttributes": {}
+        }
+      }
+    ]
+  }  

@@ -1,0 +1,55 @@
+# EVENT
+{
+  "awslogs": {
+    "data": "H4sIAAAAAAAA/+2V227bRhCGX2WwaKG2oKw9H9ibMjblCJUlV6SDJpZhrMiVTVQklSUp2zD87oXsGHUTO3XTNDcJ7wjMzL/z7fw716h0TWPPXHq1dihEe1EanR7ESRLtxyhA9UXlPAqRkIISQxWWGKMAreqzfV93axSigb1oBitbLnI7yMusv/Z5313acr1yfYz7+aJf2sqeudJV7V1m0npnSxQiiikfYDrAbHD83ThK4yQ9WWY4W+gFw1LlnFll1ZLqnCuVLZc5oRQFqOkWTeaLdVvU1bBYtc43KDxG/yh+cqseb1zVbhOuUZGjEDGNpdCMcy25loIZQxQVXDIqCSZMS4mFUIwqJqRQGCsplFKGoQC1Rema1pZrFBKFpWEEC4YNC+6ZohAdjybD6cm83fbax7SPWYpZyHAo2A427M28nbfDuqtyyLzLXdUWdtVAUYGrNoWvq+3JYWN9YRcr1+zMKxQgd9l6m7UuHxZulTcovEYXBIVoK4UCdEHfsf08ejc3wfuoDDGGa8qMJtQQaaSgEhtlNDUKS0UEJlpSLJjiWHD1FCrG8XNRMWbezNuFzQRTZNHXXNo+Nwb3F1bhPs2MkkpTSrT6cjj/vzN9iFxsQVNDqVFKEMYpwYxqobmWimBOhJTcCC4lYworIZ9AzqnSf0Mez2bT2aPM+Q5V+tn9RRU472sPdZZ13rs8hB8IljyAOXpdd3BuNw7sfVBRwVXdeUh+G0NzVbX28mfIzl32B7TnDkpbdXYF7bltIau9d826rvIG2vou62CLau8FNM5vnIeN801RV7Cs/W26L87O23dltzld46By1kMvGo9hOoHyKl/QnZ8gnUKva5wnvV963/d6YFtYFZUDMkc/fnQwbqE9PRlfPbnHx5cJSpmiVBFiBJFCYowxpZxqqTUjjBFJpGGCEPXU48qpMs97MbZ38Hx3xpcu69qiOoO3nfNXIezO4iiNYbsMX0RJDKMhTKYpxL+PkjS5xUBg92U0i3bTeAZJnELXLnW54LA7HW832f3/6ZmrnLer06yYV58gQ7+MDPuMMkdJPHtP4sGwwGgvnqSj4SjegxevoXf54Ov9+6L0k4oOx0fJSzicjV6NxvF+nDwSMotfTX+NYTv4f8UFsD+LJilMD9PRdALD2fTgYW+PlLmLf2Af8oF9nsxK4nG8mwZwdLgXpXEAHzXhf9hk37zyzStfm1dubk5u/gQ+5rKD+wwAAA=="
+  }
+}
+
+# DECOMPOSED DEBUG
+Event Data: {
+  "messageType": "DATA_MESSAGE",
+  "owner": "565219270600",
+  "logGroup": "/aws/lambda/dmc-prd-example-00-db-management",
+  "logStream": "2024/02/03/[$LATEST]fc0cb8b3067d43a7a7f28d477cffd122",
+  "subscriptionFilters": [
+    "dmc-prd-example-00-db-management"
+  ],
+  "logEvents": [
+  {
+    "id": "38065834486486539917254632610138660557327356570076577793",
+    "timestamp": 1706931053093,
+    "message": "[INFO]\t2024-02-03T03:30:53.093Z\t\tFound credentials in environment variables.\n",
+    "extractedFields": {
+      w1": "INFO",
+      w2": "2024-02-03T03:30:53.093Z\t\tFound credentials in environment variables.\n"
+    }
+  },
+  {
+    "id": "38065834491994823981291696526097982970671501862053740547",
+    "timestamp": 1706931053340,
+    "message": "[INFO]\t2024-02-03T03:30:53.339Z\tbac5371b-846a-4990-ba70-2c9767822187\tFound credentials in environment variables.\n",
+    "extractedFields": {
+      "w1": "INFO",
+      "w2": "2024-02-03T03:30:53.339Z\tbac5371b-846a-4990-ba70-2c9767822187\tFound credentials in environment variables.\n"
+    }
+  },
+  {
+    "id": "38065834512912922977513421032858486710415664954663370756",
+    "timestamp": 1706931054278,
+    "message": "[ERROR]\t2024-02-03T03:30:54.278Z\tbac5371b-846a-4990-ba70-2c9767822187\tAn error occurred: (1064, \"You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ALL ON mydb2.* TO 'user1'@'%'' at line 1\")\n",
+    "extractedFields": {
+      "w1": "ERROR",
+      "w2": "2024-02-03T03:30:54.278Z\tbac5371b-846a-4990-ba70-2c9767822187\tAn error occurred: (1064, \"You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ALL ON mydb2.* TO 'user1'@'%'' at line 1\")\n"
+   }
+  },
+  {
+    "id": "38065834512935223722711951656000022428688313316169351173",
+    "timestamp": 1706931054279,
+    "message": "[INFO]\t2024-02-03T03:30:54.279Z\tbac5371b-846a-4990-ba70-2c9767822187\tExecuting query: CREATE DATABASE IF NOT EXISTS mydb1 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci\nExecuting query: CREATE DATABASE IF NOT EXISTS mydb2 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci\nExecuting query: CREATE DATABASE IF NOT EXISTS mydb3 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci\nExecuting query: CREATE USER IF NOT EXISTS 'user1'@'%' IDENTIFIED BY 'xxxxxxxxxxxx'\nExecuting query: CREATE USER IF NOT EXISTS 'user2'@'%' IDENTIFIED BY 'xxxxxxxxxxxx'\nExecuting query: FLUSH PRIVILEGES\nExecuting query: REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'user1'@'%'\nExecuting query: GRANT ALL ON mydb1.* TO 'user1'@'%'\nExecuting query: GRANT SELECT, UPDATE, ALL ON mydb2.* TO 'user1'@'%'\n",
+    "extractedFields": {
+      "w1": "INFO",
+      "w2": "2024-02-03T03:30:54.279Z\tbac5371b-846a-4990-ba70-2c9767822187\tExecuting query: CREATE DATABASE IF NOT EXISTS mydb1 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci\nExecuting query: CREATE DATABASE IF NOT EXISTS mydb2 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci\nExecuting query: CREATE DATABASE IF NOT EXISTS mydb3 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci\nExecuting query: CREATE USER IF NOT EXISTS 'user1'@'%' IDENTIFIED BY 'xxxxxxxxxxxx'\nExecuting query: CREATE USER IF NOT EXISTS 'user2'@'%' IDENTIFIED BY 'xxxxxxxxxxxx'\nExecuting query: FLUSH PRIVILEGES\nExecuting query: REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'user1'@'%'\nExecuting query: GRANT ALL ON mydb1.* TO 'user1'@'%'\nExecuting query: GRANT SELECT, UPDATE, ALL ON mydb2.* TO 'user1'@'%'\n"
+    }
+  }
+  ]
+}

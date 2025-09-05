@@ -1,0 +1,22 @@
+{
+  "Records": [
+    {
+      "EventSource": "aws:sns",
+      "EventVersion": "1.0",
+      "EventSubscriptionArn": "arn:aws:sns:us-east-1:565219270600:dmc-prd-alerts:491a36da-4396-420a-a25c-7c42adeed32e",
+      "Sns": {
+        "Type": "Notification",
+        "MessageId": "14a378a5-82f1-505f-ae95-1845fe9d791d",
+        "TopicArn": "arn:aws:sns:us-east-1:565219270600:dmc-prd-alerts",
+        "Message": "AWS Budget Notification July 03, 2025\nAWS Account 565219270600\n\nDear AWS Customer,\n\nYou requested that we alert you when the ACTUAL Cost associated with your dmc-prd-daily-cost-budget budget is greater than $0.00 per day. Yesterday, the ACTUAL Cost associated with this budget is $5.32. You can find additional details below and by accessing the AWS Budgets dashboard [1].\n\nBudget Name: dmc-prd-daily-cost-budget\nBudget Type: Cost\nBudgeted Amount: $0.00\nAlert Type: ACTUAL\nAlert Threshold: > $0.00\nACTUAL Amount: $5.32\n\n[1] https://console.aws.amazon.com/billing/home#/budgets\n",
+        "Timestamp": "2025-07-03T12:40:12.814Z",
+        "SignatureVersion": "1",
+        "Signature": "DZar19JR3INf6zzIDOXUrx9lFH1qyu6mFvSRUvJ1Ndu8F2Y5+favTVV1I/v62EwkTu8Y2Y4wDkJlgsuLWlqwQk32EnYlFAE7kiyHp96VGDlkBVhFl0lPEHAsRuyFxuCGBdYEkCH2ziIo3QGz8QmGrGpw63vcRUHXyQYNk1CrJyA9yr8OXjmiDK/TpFPiDsFmtbUd/JtRpDLeke9fPzM7YQbhQtdYRlpRUz8DGyyHAAI4kkBdSoLN2fV/LwdW+7pC3qW/7zmuO3MbPI7AFakjVS9oAVdf+oUysCsz0nKRl/cWDNO8UBfjd7EnVQFTGl302DapLgU5hS3fChwxusFyvw==",
+        "SigningCertUrl": "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-9c6465fa7f48f5cacd23014631ec1136.pem",
+        "Subject": "AWS Budgets: dmc-prd-daily-cost-budget has exceeded your alert threshold",
+        "UnsubscribeUrl": "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:565219270600:dmc-prd-alerts:491a36da-4396-420a-a25c-7c42adeed32e",
+        "MessageAttributes": {}
+      }
+    }
+  ]
+}

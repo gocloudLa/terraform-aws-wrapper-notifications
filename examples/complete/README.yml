@@ -1,0 +1,7 @@
+title: "Complete Example"
+description: "This example demonstrates a Terraform configuration for setting up notification parameters using a module."
+main_purpose: "The main purpose is to configure notification parameters for various services such as Discord and Teams."
+key_features:
+  - "**Enable Notifications**: Enables or disables the notification system"
+  - "**Discord Webhook Url**: Specifies the webhook URL for Discord notifications"
+  - "**Teams Webhook Url**: Specifies the webhook URL for Microsoft Teams notifications"
