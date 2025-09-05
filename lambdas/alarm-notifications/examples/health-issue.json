@@ -1,0 +1,23 @@
+{
+    "Records": [
+      {
+        "EventSource": "aws:sns",
+        "EventVersion": "1.0",
+        "EventSubscriptionArn": "arn:aws:sns:us-east-1:123456789012:dummy-topic:example-subscription",
+        "Sns": {
+          "Type": "Notification",
+          "MessageId": "11111111-2222-3333-4444-555555555555",
+          "TopicArn": "arn:aws:sns:us-east-1:123456789012:dummy-topic",
+          "Subject": null,
+          "Message": "{\"version\":\"0\",\"id\":\"6b4676f6-a16a-5532-3178-fc7bbda2a6f9\",\"detail-type\":\"AWS Health Event\",\"source\":\"aws.health\",\"account\":\"685569933008\",\"time\":\"2024-09-04T19:11:59Z\",\"region\":\"us-east-1\",\"resources\":[],\"detail\":{\"eventArn\":\"arn:aws:health:us-east-1::event/LAMBDA/AWS_LAMBDA_INVOKE_ISSUE/AWS_LAMBDA_INVOKE_ISSUE_844eec7a-8ccc-5cc1-83c6-bffbf55e3fdf\",\"service\":\"LAMBDA\",\"eventTypeCode\":\"AWS_LAMBDA_INVOKE_ISSUE\",\"eventTypeCategory\":\"issue\",\"eventScopeCode\":\"ACCOUNT_SPECIFIC\",\"communicationId\":\"9d958ea13ecd72fddea5d57b5367b968bb798f45-1\",\"startTime\":\"Wed, 4 Sep 2024 16:46:00 GMT\",\"endTime\":\"Wed, 4 Sep 2024 17:53:00 GMT\",\"lastUpdatedTime\":\"Wed, 4 Sep 2024 18:31:58 GMT\",\"statusCode\":\"closed\",\"eventRegion\":\"us-east-1\",\"eventDescription\":[{\"language\":\"en_US\",\"latestDescription\":\"[11:13 AM PDT] We are investigating increased invoke error rates in the US-EAST-1 Region.\\n\\n[11:31 AM PDT] Between 9:46 AM and 10:53 AM PDT, we experienced increased invoke error rates in the US-EAST-1 Region.  Our engineering teams were automatically engaged to investigate this issue at 9:58 AM. At 10:14 AM we had identified the root cause of the issue and completed the deployment of mitigations at 10:28 AM, with full recovery observed at 10:53 AM. We can confirm that during this issue, retries would have succeeded. The issue has been resolved and the service is operating normally.\"}],\"affectedEntities\":[],\"affectedAccount\":\"048122297024\",\"page\":\"1\",\"totalPages\":\"1\"}}",
+          "Timestamp": "2024-09-04T19:11:59.000Z",
+          "SignatureVersion": "1",
+          "Signature": "dummy",
+          "SigningCertUrl": "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-dummy.pem",
+          "UnsubscribeUrl": "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe",
+          "MessageAttributes": {}
+        }
+      }
+    ]
+  }
+  

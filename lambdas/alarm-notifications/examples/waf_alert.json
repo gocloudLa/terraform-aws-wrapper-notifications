@@ -1,0 +1,23 @@
+{
+    "Records":[
+        {
+            "EventSource":"aws:sns",
+            "EventVersion":"1.0",
+            "EventSubscriptionArn":"arn:aws:sns:us-east-2:894392897371:rxt-lab-core-alerts:d7cae0f1-6a7f-4495-ab1d-3abc2922c752",
+            "Sns":{
+                "Type":"Notification",
+                "MessageId":"4044584f-45e6-5ec8-b0d4-0539f7c92e60",
+                "TopicArn":"arn:aws:sns:us-east-2:894392897371:rxt-lab-core-alerts",
+                "Subject":"OK: \"rxt-lab-core-external-00-blocked\" in US East (Ohio)",
+                "Message":"{\"AlarmName\":\"rxt-lab-core-external-00-blocked\",\"AlarmDescription\":\"This metric monitors WAF BlockedRequests\",\"AWSAccountId\":\"894392897371\",\"AlarmConfigurationUpdatedTimestamp\":\"2023-09-09T17:36:23.785+0000\",\"NewStateValue\":\"OK\",\"NewStateReason\":\"Thresholds Crossed: 1 datapoint [1.8951612903225807 (09/09/23 17:43:00)] was not greater than the upper thresholds [3.7417403092134025].\",\"StateChangeTime\":\"2023-09-09T17:48:31.920+0000\",\"Region\":\"US East (Ohio)\",\"AlarmArn\":\"arn:aws:cloudwatch:us-east-2:894392897371:alarm:rxt-lab-core-external-00-blocked\",\"OldStateValue\":\"ALARM\",\"OKActions\":[\"arn:aws:sns:us-east-2:894392897371:rxt-lab-core-alerts\"],\"AlarmActions\":[\"arn:aws:sns:us-east-2:894392897371:rxt-lab-core-alerts\"],\"InsufficientDataActions\":[],\"Trigger\":{\"Period\":300,\"EvaluationPeriods\":1,\"ComparisonOperator\":\"GreaterThanUpperThreshold\",\"ThresholdMetricId\":\"ad1\",\"TreatMissingData\":\"missing\",\"EvaluateLowSampleCountPercentile\":\"\",\"Metrics\":[{\"Expression\":\"ANOMALY_DETECTION_BAND(m1)\",\"Id\":\"ad1\",\"Label\":\"BlockedRequests (Expected)\",\"ReturnData\":true},{\"Id\":\"m1\",\"MetricStat\":{\"Metric\":{\"Dimensions\":[{\"value\":\"rxt-lab-core-external-00\",\"name\":\"WebACL\"},{\"value\":\"us-east-2\",\"name\":\"Region\"},{\"value\":\"ALL\",\"name\":\"Rule\"}],\"MetricName\":\"BlockedRequests\",\"Namespace\":\"AWS/WAFV2\"},\"Period\":300,\"Stat\":\"Average\"},\"ReturnData\":true}]}}",
+                "Timestamp":"2023-09-09T17:48:31.967Z",
+                "SignatureVersion":"1",
+                "Signature":"bpxkcRYQS6uddxqtXyW8BgEFFLLRLnlPfVHrR1ieWZo+1umnoefpmLgpyN2mDMd+lTmd0rdR543hptdbtlPSyYQuSHK5jWmJNRgUX/hBAe1ahLLvzQZQF21MwMmmnUeAPJ5TuUWd/cZx30V9cSA9VeP5G2gyZ4UPodnrBQdICmkEUG/bcQ/04PHbiCTuy9zBb7eZBdJKsexd2PoFeWvKm+aO6cRdgJf09nG0wFFisdBMpBlAh7irF8XWuDLFSQ7k1/AjKtqAKxgQBgIeyE5OOxQHKcstSPgtRFIcmItg8wBJXO1cgUsOD0YrXAfx6n15541VrsV1XWUIvcb9mpTJIg==",
+                "SigningCertUrl":"https://sns.us-east-2.amazonaws.com/SimpleNotificationService-01d088a6f77103d0fe307c0069e40ed6.pem",
+                "UnsubscribeUrl":"https://sns.us-east-2.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-2:894392897371:rxt-lab-core-alerts:d7cae0f1-6a7f-4495-ab1d-3abc2922c752",
+                "MessageAttributes":{
+                }
+            }
+        }
+    ]
+}

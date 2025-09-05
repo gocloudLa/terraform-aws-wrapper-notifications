@@ -1,0 +1,22 @@
+{
+  "Records": [
+    {
+      "EventSource": "aws:sns",
+      "EventVersion": "1.0",
+      "EventSubscriptionArn": "arn:aws:sns:us-east-2:767397917634:qnt-prd-alerts:c47ffd33-8014-44e7-a51c-973f4d3cd8ec",
+      "Sns": {
+        "Type": "Notification",
+        "MessageId": "1622d4f3-940a-5caf-be28-b41fef08f003",
+        "TopicArn": "arn:aws:sns:us-east-2:767397917634:qnt-prd-alerts",
+        "Message": "{\"notificationType\":\"Bounce\",\"bounce\":{\"feedbackId\":\"010f0197ff27b66b-c0cb522c-c5dd-492a-9916-25111e3c52e9-000000\",\"bounceType\":\"Permanent\",\"bounceSubType\":\"OnAccountSuppressionList\",\"bouncedRecipients\":[{\"emailAddress\":\"XXXXXXXXXX@XXXXXXX.com\",\"action\":\"failed\",\"status\":\"5.1.1\",\"diagnosticCode\":\"Amazon SES did not send the message to this address because it is on the suppression list for your account. For more information about removing addresses from the suppression list, see the Amazon SES Developer Guide at https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-email-suppression-list.html\"}],\"timestamp\":\"2025-07-12T15:01:22.000Z\",\"reportingMTA\":\"dns; amazonses.com\"},\"mail\":{\"timestamp\":\"2025-07-12T15:01:21.992Z\",\"source\":\"no-reply@XXXXXXXX.io\",\"sourceArn\":\"arn:aws:ses:us-east-2:XXXXXXX:identity/XXXXXXX.io\",\"sourceIp\":\"3.16.37.169\",\"callerIdentity\":\"ses-XXXXXXX.io\",\"sendingAccountId\":\"767397917634\",\"messageId\":\"010f0197ff27b5c8-4dddb077-3c21-4c22-b415-2e089cc7d6b2-000000\",\"destination\":[\"XXXXXXX@XXXXXXXXX.com\"],\"headersTruncated\":false,\"headers\":[{\"name\":\"Received\",\"value\":\"from localhost (XXXXXXXXXX.us-east-2.compute.amazonaws.com [XXXXXXXXXXX]) by email-smtp.amazonaws.com with SMTP (SimpleEmailService-d-2BCAB5ZKC) id NRKxRZGf7FMBbtXmcPIf for XXXXXXXXXXXX@XXXXXXXXXXXX.com; Sat, 12 Jul 2025 15:01:21 +0000 (UTC)\"},{\"name\":\"MIME-Version\",\"value\":\"1.0\"},{\"name\":\"Content-Type\",\"value\":\"text/html; charset=\\\"UTF-8\\\"\"},{\"name\":\"Subject\",\"value\":\"Inicio de sesión exitoso\"},{\"name\":\"From\",\"value\":\"no-reply@XXXXXXXXXXX.io\"},{\"name\":\"To\",\"value\":\"XXXXXXXXXXX@XXXXXXXXXXXXXXXX.com\"}],\"commonHeaders\":{\"from\":[\"no-reply@XXXXXXXXXX.io\"],\"to\":[\"XXXXXXXXXXXXX@XXXXXXXXXXXXX.com\"],\"subject\":\"Inicio de sesión exitoso\"}}}",
+        "Timestamp": "2025-07-12T15:01:22.310Z",
+        "SignatureVersion": "1",
+        "Signature": "iZ+2R8SI8GIRHSVPtkSMpdv3Ko9Zqna6xSeMfHKIWKa9TbUDWtCn15UeOf9LBryPdE4tt6V4DXgJ4Lvuq3nG21i5r29xJ2s6bN39f/Ai2ai8Yp5wWze2qFZ/u3WjRzsRbb/UvAlCFP9tC/gMVoodAfCCrrqdWq+yPihJtt45jebEoQRZeNaDSiTMo1wdlNUl13OBe0TKmKTK7wJbTk9ZvhORKZTsIQpXv0hlIKeaPbF2BOPo6umPIMesxmwCm2K91DaHm0OdZkDGlvkzJLaTrWNtlt0yE8524mZ3IALchxT21TabA02JJ6+1fIOcsL0qoDfSrwb2g5D+LqtIKoPEGg==",
+        "SigningCertUrl": "https://sns.us-east-2.amazonaws.com/SimpleNotificationService-9c6465fa7f48f5cacd23014631ec1136.pem",
+        "Subject": null,
+        "UnsubscribeUrl": "https://sns.us-east-2.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-2:767397917634:qnt-prd-alerts:c47ffd33-8014-44e7-a51c-973f4d3cd8ec",
+        "MessageAttributes": {}
+      }
+    }
+  ]
+}

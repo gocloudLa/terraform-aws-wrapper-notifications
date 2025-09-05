@@ -1,0 +1,22 @@
+{
+   "Records": [
+     {
+       "EventSource": "aws:sns",
+       "EventVersion": "1.0",
+       "EventSubscriptionArn": "arn:aws:sns:us-west-2:123456789012:dummy-topic:example-subscription",
+       "Sns": {
+         "Type": "Notification",
+         "MessageId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+         "TopicArn": "arn:aws:sns:us-west-2:123456789012:dummy-topic",
+         "Subject": null,
+         "Message": "{\"version\":\"0\",\"id\":\"5a527972-98c1-9ddd-2107-49e6b72268d9\",\"detail-type\":\"AWS Health Event\",\"source\":\"aws.health\",\"account\":\"123456789012\",\"time\":\"2023-08-29T03:30:00Z\",\"region\":\"us-west-2\",\"resources\":[],\"detail\":{\"eventArn\":\"arn:aws:health:us-west-2::event/EC2/AWS_EC2_MAINTENANCE_SCHEDULED/AWS_EC2_MAINTENANCE_SCHEDULED_1693278720289\",\"service\":\"EC2\",\"eventScopeCode\":\"ACCOUNT_SPECIFIC\",\"communicationId\":\"32157c62a5a64a33ec5445c5c77f941128b345fa1fe98bbd8ffd7a4a708323bf\",\"lastUpdatedTime\":\"Tue, 29 Aug 2023 03:13:27 GMT\",\"statusCode\":\"upcoming\",\"eventRegion\":\"us-west-2\",\"eventTypeCode\":\"AWS_EC2_MAINTENANCE_SCHEDULED\",\"eventTypeCategory\":\"accountNotification\",\"startTime\":\"Tue, 29 Aug 2023 03:30:00 GMT\",\"endTime\":\"Tue, 29 Aug 2023 04:30:00 GMT\",\"eventDescription\":[{\"language\":\"en_US\",\"latestDescription\":\"This is a test AWS Health Event AWS_EC2_MAINTENANCE_SCHEDULED\"}]}}",
+         "Timestamp": "2023-08-29T03:30:00Z",
+         "SignatureVersion": "1",
+         "Signature": "dummy",
+         "SigningCertUrl": "https://sns.us-west-2.amazonaws.com/SimpleNotificationService-dummy.pem",
+         "UnsubscribeUrl": "https://sns.us-west-2.amazonaws.com/?Action=Unsubscribe",
+         "MessageAttributes": {}
+       }
+     }
+   ]
+ }

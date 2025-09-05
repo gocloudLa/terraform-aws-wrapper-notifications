@@ -1,0 +1,94 @@
+module_name: Terraform Cloudwatch Notifications Module
+module_description: The Terraform Wrapper for Notifications provides the implementation of two lambdas to handle different types of notifications via Discord and/or Teams.
+module_badges:
+  - url: "https://github.com/gocloudLa/terraform-aws-wrapper-notifications/releases/latest"
+    image: "https://img.shields.io/github/v/release/gocloudLa/terraform-aws-wrapper-notifications.svg?style=for-the-badge"
+    alt: "Latest Release"
+  - url: ""
+    image: "https://img.shields.io/github/last-commit/gocloudLa/terraform-aws-wrapper-notifications.svg?style=for-the-badge"
+    alt: "Last Commit"
+  - url: "https://registry.terraform.io/modules/gocloudLa/wrapper-notifications/aws"
+    image: "https://img.shields.io/badge/Terraform-Registry-7B42BC?style=for-the-badge&logo=terraform&logoColor=white"
+    alt: "Terraform Registry"
+quick_start: |
+  ```hcl
+  notifications_parameters = {
+    enable = true
+
+    # DISCORD
+    notifications_discord_webhook_url = ""
+    alarms_discord_webhook_url        = ""
+
+    # TEAMS
+    notifications_teams_webhook_url = ""
+    alarms_teams_webhook_url        = ""
+
+    # sns_topic_arn = ""
+  }
+  ```
+features:
+  - icon: 📋
+    title: Log Notifications
+    short_description: Receives events from CloudWatch subscription filter and sends formatted log messages
+    long_description: |
+      Processes CloudWatch log events received via subscription filters and sends formatted notifications to Discord and/or Teams channels. 
+      Supports both JSON structured logs and plain text logs with automatic parsing and color-coded severity levels (ERROR, WARN, DEBUG, INFO).
+      Extracts additional metadata like source files and stack traces when available.
+    examples:
+      - title: Configuration Code
+        code: |
+          ```hcl
+          module "notifications" {
+            source = "gocloudLa/wrapper-notifications/aws"
+            
+            notifications_parameters = {
+              enable = true
+              
+              # Discord webhook for log notifications
+              notifications_discord_webhook_url = var.notifications_discord_webhook_url
+              
+              # Teams webhook for log notifications  
+              notifications_teams_webhook_url = var.notifications_teams_webhook_url
+            }
+          }
+          ```
+  - icon: 🚨
+    title: Alarm Notifications
+    short_description: Receives CloudWatch alarms and various AWS events, then sends formatted notifications
+    long_description: |
+      Processes multiple types of AWS events and sends formatted notifications to Discord and/or Teams:
+      - **CloudWatch Alarms**: Processes alarm state changes with custom tags and metadata
+      - **EventBridge Events**: Handles ECS task state changes and AWS Health events
+      - **Budget Alerts**: Processes AWS Budget notifications with spending thresholds
+      - **SES Events**: Handles email bounce, complaint, and delivery notifications
+      - **Unknown Events**: Gracefully handles unrecognized event formats
+    examples:
+      - title: Configuration Code
+        code: |
+          ```hcl
+          module "notifications" {
+            source = "gocloudLa/wrapper-notifications/aws"
+            
+            notifications_parameters = {
+              enable = true
+              
+              # Discord webhook for alarm notifications
+              alarms_discord_webhook_url = var.alarms_discord_webhook_url
+              
+              # Teams webhook for alarm notifications
+              alarms_teams_webhook_url = var.alarms_teams_webhook_url
+              
+              # Optional: Use existing SNS topic
+              sns_topic_arn = var.sns_topic_arn
+            }
+          }
+          ```
+important_notes: ""
+input_table: |
+  | enable | Controls the creation of services | `bool` | `"true"` | no |
+  | notifications_discord_webhook_url | Discord Webhook endpoint for log notifications | `string` | `""` | no |
+  | alarms_discord_webhook_url | Discord Webhook endpoint for alarm notifications | `string` | `""` | no |
+  | notifications_teams_webhook_url | Teams Webhook endpoint for log notifications | `string` | `""` | no |
+  | alarms_teams_webhook_url | Teams Webhook endpoint for alarm notifications | `string` | `""` | no |
+  | sns_topic_arn | ARN of an existing SNS Topic for sending messages | `string` | `""` | no |
+  | tags | A map of tags to assign to resources. | `map` | `{}` | no |
