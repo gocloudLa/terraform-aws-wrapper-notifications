@@ -22,7 +22,7 @@ module "lambda_notifications" {
 
   timeout = 12
 
-  tags = local.common_tags
+  tags = merge(local.common_tags, try(var.notifications_parameters.tags, var.notifications_defaults.tags, null))
 }
 
 resource "aws_lambda_layer_version" "notifications_requests" {
@@ -59,7 +59,7 @@ module "lambda_alarm_notifications" {
 
   timeout = 5
 
-  tags = local.common_tags
+  tags = merge(local.common_tags, try(var.notifications_parameters.tags, var.notifications_defaults.tags, null))
 }
 
 resource "aws_iam_role_policy" "allow_list_tags_for_alarms" {
@@ -87,7 +87,7 @@ resource "aws_sns_topic" "alerts" {
   count = local.create_aws_sns_topic
 
   name = "${local.common_name}-alerts"
-  tags = local.common_tags
+  tags = merge(local.common_tags, try(var.notifications_parameters.tags, var.notifications_defaults.tags, null))
 }
 
 resource "aws_sns_topic_subscription" "alerts" {
