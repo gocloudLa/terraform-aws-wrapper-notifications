@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.0.0 (2025-09-05)
+
+
+### Features
+
+* **ci:** Add Dependabot configuration. ([01d10c5](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/commit/01d10c56a20f402347d0931980122d1903b1d44b))
+* **module:** initial release ([#1](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/issues/1)) ([3d6b6ab](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/commit/3d6b6ab78846ec0939724048a351bb86903d6d56))
+
+
+### Miscellaneous Chores
+
+* release 1.0.0 ([8625dd4](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/commit/8625dd4c4175a8af466913a75eae8c4ca501f6cb))
+
 ## 1.0.0 (2025-09-04)
 
 
