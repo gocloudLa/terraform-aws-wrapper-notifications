@@ -100,9 +100,18 @@ def lambda_handler(event, context):
         for match in matches:
           event_level, event_timestamp, event_requestid, event_text = match
       else:
-        # It will be executed if no matches were found, it is sent as debug
-        event_level = "DEBUG"
-        event_timestamp = event_timestamp # Take the default log_group
+        # Third strategy: Simple level detection in first 100 characters
+        message_start = log_event['message'][:100].upper()
+        if 'ERROR' in message_start or 'FATAL' in message_start or 'EMERG' in message_start or 'CRIT' in message_start:
+            event_level = "ERROR"
+        elif 'WARN' in message_start:
+            event_level = "WARN"
+        elif 'INFO' in message_start or 'NOTICE' in message_start:
+            event_level = "INFO"
+        else:
+            event_level = "DEBUG"  # Default
+        
+        event_timestamp = event_timestamp
         event_requestid = "null"
         event_text = log_event['message']
 
