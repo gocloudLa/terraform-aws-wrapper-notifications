@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/compare/v1.0.0...v1.0.1) (2025-09-08)
+
+
+### Bug Fixes
+
+* **lambda:** log level evaluation ([#4](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/issues/4)) ([7eb8777](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/commit/7eb8777ace0d5e557b7eb9b0ae84abf1f82aa7f3))
+
 ## 1.0.0 (2025-09-05)
 
 
