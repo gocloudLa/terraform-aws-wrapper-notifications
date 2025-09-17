@@ -241,7 +241,7 @@ def process_eventbridge_message(record_timestamp, record_message):
         return {
             'title': title,
             'message': event_text,
-            'color': get_color(last_status)
+            'color': get_color()
         }
 
     elif source == 'aws.health':
