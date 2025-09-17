@@ -227,6 +227,7 @@ def process_eventbridge_message(record_timestamp, record_message):
             reason = record_message['detail']['reason']
             alarm_name = f"{metric}"
             level, resource = "CRIT", "AWS/ECS"
+            last_status = None
             
             event_text = {
                 'Level' : level,
@@ -241,7 +242,7 @@ def process_eventbridge_message(record_timestamp, record_message):
         return {
             'title': title,
             'message': event_text,
-            'color': get_color()
+            'color': get_color(last_status)
         }
 
     elif source == 'aws.health':
