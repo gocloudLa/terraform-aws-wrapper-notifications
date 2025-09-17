@@ -225,7 +225,7 @@ def process_eventbridge_message(record_timestamp, record_message):
             cluster_arn = record_message['detail']['clusterArn']
             capacity_provider = record_message['detail']['capacityProviderArns']
             reason = record_message['detail']['reason']
-            alarm_name = f"{metric}-{reason}"
+            alarm_name = f"{metric}"
             level, resource = "CRIT", "AWS/ECS"
             
             event_text = {
