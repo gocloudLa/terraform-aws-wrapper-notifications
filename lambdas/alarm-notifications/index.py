@@ -200,7 +200,7 @@ def process_eventbridge_message(record_timestamp, record_message):
 
         metric = record_message['detail-type']
 
-        if metric = 'ECS Task State Change':
+        if metric == 'ECS Task State Change':
 
             last_status = record_message['detail']['lastStatus']            
             containers_name = record_message['detail']['containers'][0]['name']
