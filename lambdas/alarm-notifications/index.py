@@ -198,25 +198,45 @@ def process_eventbridge_message(record_timestamp, record_message):
     
     if source == 'aws.ecs':
 
-        last_status = record_message['detail']['lastStatus']
         metric = record_message['detail-type']
-        containers_name = record_message['detail']['containers'][0]['name']
-        service_name = record_message['detail']['group'].split(":")[-1]
-        reason = record_message['detail']['stoppedReason']
 
-        alarm_name = f"{metric}-{containers_name}"
-        level, resource, desired_status = "CRIT", "AWS/ECS", "RUNNING"
+        if metric == 'ECS Task State Change':
+
+            last_status = record_message['detail']['lastStatus']            
+            containers_name = record_message['detail']['containers'][0]['name']
+            service_name = record_message['detail']['group'].split(":")[-1]
+            reason = record_message['detail']['stoppedReason']
+            alarm_name = f"{metric}-{containers_name}"
+            level, resource, desired_status = "CRIT", "AWS/ECS", "RUNNING"
         
-        event_text = {
-            'Level' : level,
-            'Region' : region,
-            'Resource' : resource,
-            'Service Name' : service_name,
-            'Metric' : metric,
-            'Reason' : reason,
-            'Alert Threshold' : desired_status,
-            'State Change' : last_status
-        }
+            event_text = {
+                'Level' : level,
+                'Region' : region,
+                'Resource' : resource,
+                'Service Name' : service_name,
+                'Metric' : metric,
+                'Reason' : reason,
+                'Alert Threshold' : desired_status,
+                'State Change' : last_status
+            }
+
+        else:
+            event_type = record_message['detail']['eventType']
+            cluster_arn = record_message['detail']['clusterArn']
+            capacity_provider = record_message['detail']['capacityProviderArns']
+            reason = record_message['detail']['reason']
+            alarm_name = f"{metric}"
+            level, resource = "CRIT", "AWS/ECS"
+            last_status = None
+            
+            event_text = {
+                'Level' : level,
+                'Region' : region,
+                'Resource' : resource,
+                'Cluster Arn' : cluster_arn,
+                'Event Type' : event_type,
+                'Reason' : reason
+            }
 
         title = f"{level} - {alarm_name} | {time_stamp}"
         return {
