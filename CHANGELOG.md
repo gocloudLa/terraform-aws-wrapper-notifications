@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/compare/v1.0.1...v1.1.0) (2025-10-11)
+
+
+### Features
+
+* **ecs:** add alarm capacity unavailable ([#6](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/issues/6)) ([3fd7246](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/commit/3fd7246c9ad02a012af1115c5e557f966e5bab2a))
+
 ## [1.0.1](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/compare/v1.0.0...v1.0.1) (2025-09-08)
 
 
