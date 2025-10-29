@@ -1,6 +1,6 @@
 module "lambda_notifications" {
   source  = "terraform-aws-modules/lambda/aws"
-  version = "8.1.0"
+  version = "8.1.2"
 
   count = local.notifications_enable
 
@@ -37,7 +37,7 @@ resource "aws_lambda_layer_version" "notifications_requests" {
 
 module "lambda_alarm_notifications" {
   source  = "terraform-aws-modules/lambda/aws"
-  version = "8.1.0"
+  version = "8.1.2"
 
   count = local.notifications_enable
 
