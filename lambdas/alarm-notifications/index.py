@@ -141,8 +141,8 @@ def process_cloudwatch_alarm(record_timestamp, record_message):
         
     threshold = record_message.get("Trigger", {}).get("Threshold", "Unknown")
     resource  = record_message.get("Trigger", {}).get("Namespace", "Unknown")
-    region    = record_message.get("Trigger", {}).get("Region", "Unknown")
-    alarm_arn = record_message.get("Trigger", {}).get("AlarmArn", "Unknown")
+    region    = record_message.get("Region", "Unknown")
+    alarm_arn = record_message.get("AlarmArn", "Unknown")
 
     tags = get_alarm_tags(alarm_arn)
     alarm_tags = get_alarm_metadata(tags)
@@ -413,7 +413,11 @@ def lambda_handler(event, context):
 
 
 def send_failure_notification(error, event, context):
-    title = f"LAMBDA ERROR | {context.aws_request_id}"
+
+    for record in event['Records']:
+        record_timestamp = record['Sns']['Timestamp']
+
+    title = f"LAMBDA ERROR | {record_timestamp}"
 
     message = {
         "Level": "CRITICAL",
