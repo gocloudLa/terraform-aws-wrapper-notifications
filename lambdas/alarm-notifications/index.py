@@ -139,10 +139,10 @@ def process_cloudwatch_alarm(record_timestamp, record_message):
         print(f"Alarm {alarm_name} has state INSUFFICIENT_DATA, not sending notification.")
         return None
         
-    threshold = record_message['Trigger']['Threshold']
-    resource = record_message['Trigger']['Namespace']
-    region = record_message['Region']
-    alarm_arn = record_message['AlarmArn']
+    threshold = record_message.get("Trigger", {}).get("Threshold", "Unknown")
+    resource  = record_message.get("Trigger", {}).get("Namespace", "Unknown")
+    region    = record_message.get("Trigger", {}).get("Region", "Unknown")
+    alarm_arn = record_message.get("Trigger", {}).get("AlarmArn", "Unknown")
 
     tags = get_alarm_tags(alarm_arn)
     alarm_tags = get_alarm_metadata(tags)
@@ -391,17 +391,40 @@ def process_ses_message(record_timestamp, record_message):
     }
 
 def lambda_handler(event, context):
-    # SEND MESSAGE
-    if 'Records' in event:
-        processed_events = process_records(event, context)
-    else:
-        # Don't know the format
-        print (event)
-        pass
-    
-    for event_data in processed_events:
-        if discord_webhook_url:
-            send_discord_message(discord_webhook_url, event_data['title'], event_data['message'], event_data['color'])
-        if teams_webhook_url:
-            send_teams_message(teams_webhook_url, event_data['title'], event_data['message'], event_data['color'])
+    try:
+        # SEND MESSAGE
+        if 'Records' in event:
+            processed_events = process_records(event, context)
+        else:
+            # Don't know the format
+            print(event)
+            pass
 
+        for event_data in processed_events:
+            if discord_webhook_url:
+                send_discord_message(discord_webhook_url, event_data['title'], event_data['message'], event_data['color'])
+            if teams_webhook_url:
+                send_teams_message(teams_webhook_url, event_data['title'], event_data['message'], event_data['color'])
+
+    except Exception as e:
+        print(f"ERROR: {e}")
+        send_failure_notification(e, event, context)
+        raise
+
+
+def send_failure_notification(error, event, context):
+    title = f"LAMBDA ERROR | {context.aws_request_id}"
+
+    message = {
+        "Level": "CRITICAL",
+        "Region": os.environ.get("AWS_REGION", "unknown"),
+        "Error": str(error),
+        "Event": json.dumps(event)
+    }
+
+    color = get_color()
+
+    if discord_webhook_url:
+        send_discord_message(discord_webhook_url, title, message, color)
+    if teams_webhook_url:
+        send_teams_message(teams_webhook_url, title, message, color)
