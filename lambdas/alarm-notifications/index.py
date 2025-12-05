@@ -129,7 +129,7 @@ def process_cloudwatch_alarm(record_timestamp, record_message):
 
     # EXTRACT FIELDS THAT I AM GOING TO USE
     alarm_name = record_message['AlarmName']
-    alarmdescription = record_message['AlarmDescription']
+    alarmdescription = record_message.get("AlarmDescription", "Unknown")
     newstatevalue = record_message['NewStateValue']
     newstatereason = record_message['NewStateReason']
     statechangetime = record_message['StateChangeTime']
@@ -418,12 +418,12 @@ def send_failure_notification(error, event, context):
         record_timestamp = record['Sns']['Timestamp']
 
     title = f"LAMBDA ERROR | {record_timestamp}"
+    print("RAW_EVENT:", json.dumps(event))
 
     message = {
         "Level": "CRITICAL",
         "Region": os.environ.get("AWS_REGION", "unknown"),
-        "Error": str(error),
-        "Event": json.dumps(event)
+        "Error": str(error)
     }
 
     color = get_color()
