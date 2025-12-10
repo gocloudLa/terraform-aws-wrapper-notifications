@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.1](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/compare/v1.1.0...v1.1.1) (2025-12-10)
+
+
+### Bug Fixes
+
+* **deps:** bump terraform-aws-modules/lambda/aws from 8.1.0 to 8.1.2 in the all-terraform-dependencies group across 1 directory ([#8](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/issues/8)) ([35fb610](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/commit/35fb610ab5b68635461bf1811016056fe138111d))
+* **module:** add cw alarm unknowns message & error notifications ([#10](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/issues/10)) ([6744a7e](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/commit/6744a7e10b9af84e73d684b224e85522f8be0019))
+
 ## [1.1.0](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/compare/v1.0.1...v1.1.0) (2025-10-11)
 
 
