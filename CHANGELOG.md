@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/compare/v1.1.1...v1.1.2) (2026-02-02)
+
+
+### Bug Fixes
+
+* **lambda:** add unknown states values in alarms ([#12](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/issues/12)) ([8c02afd](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/commit/8c02afd39621128e383b271e9e31da15d1c6fd21))
+
 ## [1.1.1](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/compare/v1.1.0...v1.1.1) (2025-12-10)
 
 
