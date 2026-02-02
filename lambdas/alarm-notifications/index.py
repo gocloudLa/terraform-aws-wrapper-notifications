@@ -130,10 +130,10 @@ def process_cloudwatch_alarm(record_timestamp, record_message):
     # EXTRACT FIELDS THAT I AM GOING TO USE
     alarm_name = record_message['AlarmName']
     alarmdescription = record_message.get("AlarmDescription", "Unknown")
-    newstatevalue = record_message['NewStateValue']
-    newstatereason = record_message['NewStateReason']
-    statechangetime = record_message['StateChangeTime']
-    oldstatevalue = record_message['OldStateValue']
+    newstatevalue = record_message.get("NewStateValue", "Unknown")
+    newstatereason = record_message.get("NewStateReason", "Unknown")
+    statechangetime = record_message.get("StateChangeTime", "Unknown")
+    oldstatevalue = record_message.get("OldStateValue", "Unknown")
 
     if oldstatevalue == 'INSUFFICIENT_DATA':
         print(f"Alarm {alarm_name} has state INSUFFICIENT_DATA, not sending notification.")
