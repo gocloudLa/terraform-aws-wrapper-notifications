@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/compare/v1.1.2...v1.1.3) (2026-02-26)
+
+
+### Bug Fixes
+
+* **deps:** bump terraform-aws-modules/lambda/aws from 8.1.2 to 8.7.0 in the all-terraform-dependencies group across 1 directory ([#14](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/issues/14)) ([9978b41](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/commit/9978b41fba1f1ad5dd84e0fb979d8ee80ddb6d72))
+
 ## [1.1.2](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/compare/v1.1.1...v1.1.2) (2026-02-02)
 
 
