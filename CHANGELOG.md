@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.4](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/compare/v1.1.3...v1.1.4) (2026-03-03)
+
+
+### Bug Fixes
+
+* **lambda:** add support for no recreation ([#16](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/issues/16)) ([2aa59c8](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/commit/2aa59c896f8568029f5d2a7d8cfa2eb9df5179b4))
+
 ## [1.1.3](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/compare/v1.1.2...v1.1.3) (2026-02-26)
 
 
