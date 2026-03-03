@@ -9,6 +9,9 @@ module "lambda_notifications" {
   handler       = "index.lambda_handler"
   runtime       = "python3.13"
 
+  ignore_source_code_hash      = true
+  trigger_on_package_timestamp = false
+
   layers = [aws_lambda_layer_version.notifications_requests[0].arn]
 
   source_path = "${path.module}/lambdas/notifications"
@@ -45,6 +48,9 @@ module "lambda_alarm_notifications" {
   description   = "Lambda function for alarm-notifications"
   handler       = "index.lambda_handler"
   runtime       = "python3.13"
+
+  ignore_source_code_hash      = true
+  trigger_on_package_timestamp = false
 
   layers = [aws_lambda_layer_version.notifications_requests[0].arn]
 
