@@ -1,0 +1,22 @@
+{
+  "Records": [
+    {
+      "EventSource": "aws:sns",
+      "EventVersion": "1.0",
+      "EventSubscriptionArn": "arn:aws:sns:us-east-2:XXXXXXX:dmc-prd-alerts:XXXXXXXXXXXXXXXXXXXXXXX",
+      "Sns": {
+        "Type": "Notification",
+        "MessageId": "XXXXXXXXXXXXXXXXXXXXXX",
+        "TopicArn": "arn:aws:sns:us-east-2:XXXXXXXX:dmc-prd-alerts",
+        "Message": "{\"accountId\":\"XXXXXXXXXXXXXX\",\"accountName\":\"democorp\",\"anomalyStartDate\":\"2026-04-24T00:00:00Z\",\"anomalyEndDate\":\"2026-04-25T00:00:00Z\",\"anomalyId\":\"XXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\"dimensionKey\":{\"type\":\"DIMENSION\",\"key\":\"SERVICE\"},\"dimensionalValue\":\"AmazonCloudWatch\",\"monitorArn\":\"arn:aws:ce::XXXXXXXXXXXXXX:anomalymonitor/XXXXXXXXXXXXXXXXXXXXXXX\",\"monitorName\":\"dmc-prd-cost-anomaly\",\"monitorType\":\"DIMENSIONAL\",\"anomalyScore\":{\"maxScore\":0.57,\"currentScore\":0.57},\"impact\":{\"maxImpact\":0.72,\"totalExpectedSpend\":0.08,\"totalActualSpend\":1.52,\"totalImpact\":1.44,\"totalImpactPercentage\":1800.0},\"rootCauses\":[{\"service\":\"AmazonCloudWatch\",\"region\":null,\"linkedAccount\":\"XXXXXXXXXXXXXX\",\"linkedAccountName\":\"democorp\",\"usageType\":null,\"impactContribution\":1.44}],\"anomalyDetailsLink\":\"XXXXXXXXXXXXX\",\"subscriptionId\":\"XXXXXXXXXXXXXXXXXX\",\"subscriptionName\":\"xxxxxxxxxxxxxxxxx\"}",
+        "Timestamp": "2026-04-26T11:18:44.300Z",
+        "SignatureVersion": "1",
+        "Signature": "XXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        "SigningCertUrl": "XXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        "Subject": "AWS Cost Management: Cost anomaly detected on 2026-04-26T11:18:43.502650794Z",
+        "UnsubscribeUrl": "XXXXXXXXXXXXXXXXXXXXXX",
+        "MessageAttributes": {}
+      }
+    }
+  ]
+}
