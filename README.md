@@ -77,6 +77,7 @@ Processes multiple types of AWS events and sends formatted notifications to Disc
 - **EventBridge Events**: Handles ECS task state changes and AWS Health events
 - **Budget Alerts**: Processes AWS Budget notifications with spending thresholds
 - **SES Events**: Handles email bounce, complaint, and delivery notifications
+- **Cost Anomaly Detection**: Processes cost anomaly alerts with impact and root cause details
 - **Unknown Events**: Gracefully handles unrecognized event formats
 
 
@@ -122,6 +123,91 @@ module "notifications" {
 
 
 
+
+
+## ⚠️ Important Notes
+## Adding a New Event Integration
+
+The alarm-notifications Lambda identifies each event type by inspecting specific keys in the SNS message payload.
+When a new AWS event needs to be supported, follow this workflow:
+
+### 1. Capture the raw event
+
+Trigger the event in your AWS account and let it reach the Lambda. If the event type is not yet handled,
+it will be processed by `process_unknown_message` and the raw payload will be printed in the CloudWatch Logs
+of the Lambda (look for `RAW_EVENT` in the failure log). Copy that full JSON payload.
+
+### 2. Save the example event
+
+Create a new JSON file under `lambdas/alarm-notifications/examples/` with a descriptive name
+(e.g. `cost_anomaly.json`, `guardduty.json`). The file must contain the full SNS-wrapped structure
+including the `Records` array, since that is what the Lambda receives as input. Replace any
+sensitive values (account IDs, ARNs, endpoints) with placeholder values like `XXXXXX`.
+
+### 3. Identify the detection key
+
+The Lambda parses `Records[].Sns.Message` as JSON. The routing logic in the function `process_records` checks for a
+unique key in that parsed object to determine the event type.
+
+Current detection table:
+
+| Event Type              | Detection Logic                                              |
+|-------------------------|--------------------------------------------------------------|
+| CloudWatch Alarm        | `dict` with key `AlarmName`                                  |
+| EventBridge             | `dict` with key `detail`                                     |
+| Budget Notification     | `string` containing `AWS Budget Notification`                |
+| SES Notification        | `dict` with key `notificationType`                           |
+| Cost Anomaly Detection  | `dict` with key `anomalyId`                                  |
+| Unknown (fallback)      | Any event that does not match the above conditions           |
+
+To add a new type, find a top-level key in your event's JSON that is **unique** and not present
+in any of the existing event types. Then add a new `elif` branch in the `process_records`
+function inside `lambdas/alarm-notifications/index.py`, **before** the `else` (unknown) block.
+
+### 4. Build the processor function
+
+Create a new function following the naming convention `process_<event_type>_message(record_timestamp, record_message)`.
+The function must return a dict with exactly three keys:
+
+```python
+return {
+    'title': str,     # Summary line shown as the notification title
+    'message': dict,  # Key-value pairs displayed in the notification body
+    'color': int      # Integer color value from get_color()
+}
+```
+
+**Extracting fields:** Use `.get('key', 'default')` to safely read each field from the event.
+This prevents `KeyError` exceptions when optional fields are missing. For nested fields,
+chain `.get()` calls.
+
+**Color values:** The `get_color(value)` function maps a severity string to a color integer.
+If your event does not have a clear severity mapping, simply use `get_color()` (no arguments)
+and it will default to red. You can also add new severity mappings to `get_color()` if needed.
+
+**Building the message dict:** The keys in the `message` dict become the labels in the
+notification. Keep key names short (under 20 characters) so they align properly in the
+fixed-width formatting used by Discord and Teams. The values should be strings or
+easily printable types.
+
+### 5. Test the integration
+
+1. Open the **AWS Console** and navigate to the **Lambda** service.
+2. Find the **alarm-notifications** Lambda function.
+3. Go to the **Test** tab.
+4. Paste the full example JSON event from `lambdas/alarm-notifications/examples/`.
+5. Click **Test** and verify:
+   - The Lambda executes **without errors** (check the Execution result panel).
+   - The notification arrives in Discord and/or Teams with the expected format.
+
+> **Note:** Make sure the Lambda has the `DISCORD_WEBHOOK_URL` and/or `TEAMS_WEBHOOK_URL`
+> environment variables configured, otherwise notifications will not be sent even if the
+> function executes successfully.
+
+### 6. Update documentation
+
+- Add the new event type to the `long_description` of the **Alarm Notifications** feature in this file.
+- Add a new row to the detection logic table in this section (step 3).
 
 
 
