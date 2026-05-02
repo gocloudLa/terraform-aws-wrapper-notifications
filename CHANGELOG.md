@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/compare/v1.1.4...v1.2.0) (2026-05-02)
+
+
+### Features
+
+* **module:** add cost anomaly alarm & fix unknown message process ([#19](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/issues/19)) ([31c735b](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/commit/31c735b1a5530077aac0f473096b044931a94c28))
+
 ## [1.1.4](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/compare/v1.1.3...v1.1.4) (2026-03-03)
 
 
