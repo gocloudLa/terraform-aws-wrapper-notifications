@@ -96,6 +96,9 @@ def process_records(event, context):
         elif isinstance(record_message, dict) and 'notificationType' in record_message:
             # It's an SES event
             processed_event = process_ses_message(record_timestamp, record_message)
+        elif isinstance(record_message, dict) and 'anomalyId' in record_message:
+            # It's a Cost Anomaly Detection event
+            processed_event = process_cost_anomaly_message(record_timestamp, record_message)
         else:
             # It's an unknown event
             processed_event = process_unknown_message(record_timestamp, record_message, context)
@@ -332,7 +335,7 @@ def process_unknown_message(record_timestamp, record_message, context):
         reason = str(record_message)
 
     event_text = {
-        'Level': UNKNOWN,
+        'Level': 'UNKNOWN',
         'Region': region,
         'AccountID': account_id,
         'Reason': reason
@@ -345,6 +348,56 @@ def process_unknown_message(record_timestamp, record_message, context):
         "message": event_text,
         "color": get_color()
     }     
+
+# BUILD COST ANOMALY MESSAGE
+def process_cost_anomaly_message(record_timestamp, record_message):
+
+    account_id = record_message.get('accountId', 'Unknown')
+    account_name = record_message.get('accountName', 'Unknown')
+    monitor_name = record_message.get('monitorName', 'Unknown')
+    anomaly_start = record_message.get('anomalyStartDate', 'Unknown')
+    anomaly_end = record_message.get('anomalyEndDate', 'Unknown')
+
+    impact = record_message.get('impact', {})
+    total_actual_spend = impact.get('totalActualSpend', 'Unknown')
+    total_expected_spend = impact.get('totalExpectedSpend', 'Unknown')
+    total_impact = impact.get('totalImpact', 'Unknown')
+    total_impact_percentage = impact.get('totalImpactPercentage', 'Unknown')
+
+    anomaly_score = record_message.get('anomalyScore', {})
+    max_score = anomaly_score.get('maxScore', 'Unknown')
+
+    root_causes = record_message.get('rootCauses', [])
+    if root_causes:
+        service = root_causes[0].get('service', 'Unknown')
+        linked_account = root_causes[0].get('linkedAccountName', 'Unknown')
+        region = root_causes[0].get('region', 'Unknown') or os.environ.get('AWS_REGION', 'Unknown')
+    else:
+        service = 'Unknown'
+        linked_account = account_name
+        region = os.environ.get('AWS_REGION', 'Unknown')
+
+    event_text = {
+        'Account Name'       : account_name,
+        'Account ID'         : account_id,
+        'Region'             : region,
+        'Monitor'            : monitor_name,
+        'Service'            : service,
+        'Anomaly Start'      : anomaly_start,
+        'Anomaly End'        : anomaly_end,
+        'Expected Spend'     : f"${total_expected_spend}",
+        'Actual Spend'       : f"${total_actual_spend}",
+        'Impact'             : f"${total_impact} ({total_impact_percentage}%)",
+        'Anomaly Score'      : max_score,
+    }
+
+    title = f"COST ANOMALY - {service} | {record_timestamp}"
+
+    return {
+        'title': title,
+        'message': event_text,
+        'color': get_color()
+    }
 
 # BUILD SES MESSAGE
 def process_ses_message(record_timestamp, record_message):
