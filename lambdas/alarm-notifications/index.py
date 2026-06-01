@@ -68,7 +68,7 @@ def send_teams_message(teams_webhook_url, title, message, color):
     headers = {'Content-Type': 'application/json'}
     response = requests.post(teams_webhook_url, data=json.dumps(payload), headers=headers)
     
-    if response.status_code != 204 and response.status_code != 200:
+    if response.status_code not in [200, 202, 204]:
         raise Exception(f"Failed to send Teams message. Status code: {response.status_code}, response: {response.text}")
     else:
         print("Teams message sent successfully.")
