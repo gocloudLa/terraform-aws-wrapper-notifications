@@ -30,15 +30,35 @@ def send_teams_message(teams_webhook_url, title, message, color):
     def int_to_hex_color(color):
         return format(color, '06x')
 
-    message = f"<pre>{message}</pre>"
-        
     payload = {
-        "@type": "MessageCard",
-        "@context": "https://schema.org/extensions",
-        "summary": title,
-        "themeColor": int_to_hex_color(color),
-        "title": title,
-        "text": message
+        "type": "message",
+        "attachments": [
+            {
+                "contentType": "application/vnd.microsoft.card.adaptive",
+                "content": {
+                    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                    "type": "AdaptiveCard",
+                    "version": "1.4",
+                    "body": [
+                        {
+                            "type": "TextBlock",
+                            "text": title,
+                            "weight": "Bolder",
+                            "size": "Medium",
+                            "wrap": True,
+                            "color": "Attention" if int_to_hex_color(color) == "ff0000" else "Warning" if int_to_hex_color(color) == "ffa500" else "Good"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "text": message,
+                            "wrap": True,
+                            "fontType": "Monospace",
+                            "size": "Small"
+                        }
+                    ]
+                }
+            }
+        ]
     }
 
     headers = {'Content-Type': 'application/json'}
