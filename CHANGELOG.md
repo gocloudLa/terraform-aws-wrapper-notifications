@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/compare/v1.2.0...v1.3.0) (2026-06-02)
+
+
+### Features
+
+* **lambda:** update status code for teams messages ([#21](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/issues/21)) ([032aca5](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/commit/032aca5f7ab3c9f04fa74850adf5cff05e6623ff))
+
 ## [1.2.0](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/compare/v1.1.4...v1.2.0) (2026-05-02)
 
 
