@@ -54,21 +54,43 @@ def send_teams_message(teams_webhook_url, title, message, color):
         padding = ' ' * (space_length - len(key))
         lines.append(f"{key}:{padding}{value}")
 
-    message_text = "<pre>" + "\n".join(lines) + "</pre>"
+    message_text = "\n".join(lines)
 
     payload = {
-        "@type": "MessageCard",
-        "@context": "https://schema.org/extensions",
-        "summary": title,
-        "themeColor": int_to_hex_color(color),
-        "title": title,
-        "text": message_text
+        "type": "message",
+        "attachments": [
+            {
+                "contentType": "application/vnd.microsoft.card.adaptive",
+                "content": {
+                    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                    "type": "AdaptiveCard",
+                    "version": "1.4",
+                    "body": [
+                        {
+                            "type": "TextBlock",
+                            "text": title,
+                            "weight": "Bolder",
+                            "size": "Medium",
+                            "wrap": True,
+                            "color": "Attention" if int_to_hex_color(color) == "ff0000" else "Warning" if int_to_hex_color(color) == "ffa500" else "Good"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "text": message_text,
+                            "wrap": True,
+                            "fontType": "Monospace",
+                            "size": "Small"
+                        }
+                    ]
+                }
+            }
+        ]
     }
 
     headers = {'Content-Type': 'application/json'}
     response = requests.post(teams_webhook_url, data=json.dumps(payload), headers=headers)
     
-    if response.status_code != 204 and response.status_code != 200:
+    if response.status_code not in [200, 202, 204]:
         raise Exception(f"Failed to send Teams message. Status code: {response.status_code}, response: {response.text}")
     else:
         print("Teams message sent successfully.")
