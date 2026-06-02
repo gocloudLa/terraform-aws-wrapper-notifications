@@ -54,15 +54,37 @@ def send_teams_message(teams_webhook_url, title, message, color):
         padding = ' ' * (space_length - len(key))
         lines.append(f"{key}:{padding}{value}")
 
-    message_text = "<pre>" + "\n".join(lines) + "</pre>"
+    message_text = "\n".join(lines)
 
     payload = {
-        "@type": "MessageCard",
-        "@context": "https://schema.org/extensions",
-        "summary": title,
-        "themeColor": int_to_hex_color(color),
-        "title": title,
-        "text": message_text
+        "type": "message",
+        "attachments": [
+            {
+                "contentType": "application/vnd.microsoft.card.adaptive",
+                "content": {
+                    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                    "type": "AdaptiveCard",
+                    "version": "1.4",
+                    "body": [
+                        {
+                            "type": "TextBlock",
+                            "text": title,
+                            "weight": "Bolder",
+                            "size": "Medium",
+                            "wrap": True,
+                            "color": "Attention" if int_to_hex_color(color) == "ff0000" else "Warning" if int_to_hex_color(color) == "ffa500" else "Good"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "text": message_text,
+                            "wrap": True,
+                            "fontType": "Monospace",
+                            "size": "Small"
+                        }
+                    ]
+                }
+            }
+        ]
     }
 
     headers = {'Content-Type': 'application/json'}
