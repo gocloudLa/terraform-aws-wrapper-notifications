@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/compare/v1.3.0...v1.4.0) (2026-06-05)
+
+
+### Features
+
+* **lambda:** add alarm link in cw alarms notifications ([#23](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/issues/23)) ([cf2377f](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/commit/cf2377f81ba57085df699b6607a5259048b7395a))
+
 ## [1.3.0](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/compare/v1.2.0...v1.3.0) (2026-06-02)
 
 
