@@ -22,10 +22,22 @@ def get_color(value=None):
 def send_discord_message(discord_webhook_url, title, message, color):
 
     lines = []
+    link = None
     space_length = 21
+    min_line_width = 120
     for key, value in message.items():
-        lines.append(f"{key}:{' ' * (space_length - len(key))}{value}")
+        if key == 'Link':
+            link = value
+            continue
+        line = f"{key}:{' ' * (space_length - len(key))}{value}"
+        lines.append(line)
+    
+    max_width = max(max((len(l) for l in lines), default=0), min_line_width)
+    lines = [line.ljust(max_width) for line in lines]
     message_text = "```\n" + "\n".join(lines) + "\n```"
+
+    if link:
+        message_text += f"\n🔗 [View Alarm]({link})"
 
     payload = {
         "embeds": [
@@ -49,12 +61,46 @@ def send_teams_message(teams_webhook_url, title, message, color):
         return format(color, '06x')
 
     lines = []
+    link = None
     space_length = 21
     for key, value in message.items():
+        if key == 'Link':
+            link = value
+            continue
         padding = ' ' * (space_length - len(key))
         lines.append(f"{key}:{padding}{value}")
 
     message_text = "\n".join(lines)
+
+    body = [
+        {
+            "type": "TextBlock",
+            "text": title,
+            "weight": "Bolder",
+            "size": "Medium",
+            "wrap": True,
+            "color": "Attention" if int_to_hex_color(color) == "ff0000" else "Warning" if int_to_hex_color(color) == "ffa500" else "Good"
+        },
+        {
+            "type": "TextBlock",
+            "text": message_text,
+            "wrap": True,
+            "fontType": "Monospace",
+            "size": "Small"
+        }
+    ]
+
+    if link:
+        body.append({
+            "type": "ActionSet",
+            "actions": [
+                {
+                    "type": "Action.OpenUrl",
+                    "title": "🔗 View Alarm",
+                    "url": link
+                }
+            ]
+        })
 
     payload = {
         "type": "message",
@@ -65,23 +111,7 @@ def send_teams_message(teams_webhook_url, title, message, color):
                     "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
                     "type": "AdaptiveCard",
                     "version": "1.4",
-                    "body": [
-                        {
-                            "type": "TextBlock",
-                            "text": title,
-                            "weight": "Bolder",
-                            "size": "Medium",
-                            "wrap": True,
-                            "color": "Attention" if int_to_hex_color(color) == "ff0000" else "Warning" if int_to_hex_color(color) == "ffa500" else "Good"
-                        },
-                        {
-                            "type": "TextBlock",
-                            "text": message_text,
-                            "wrap": True,
-                            "fontType": "Monospace",
-                            "size": "Small"
-                        }
-                    ]
+                    "body": body
                 }
             }
         ]
@@ -154,11 +184,13 @@ def process_cloudwatch_alarm(record_timestamp, record_message):
 
     # EXTRACT FIELDS THAT I AM GOING TO USE
     alarm_name = record_message['AlarmName']
+    account_id = record_message.get("AWSAccountId", "Unknown")
     alarmdescription = record_message.get("AlarmDescription", "Unknown")
     newstatevalue = record_message.get("NewStateValue", "Unknown")
     newstatereason = record_message.get("NewStateReason", "Unknown")
     statechangetime = record_message.get("StateChangeTime", "Unknown")
     oldstatevalue = record_message.get("OldStateValue", "Unknown")
+    metric = record_message.get("Trigger", {}).get("MetricName", "Unknown")
 
     if oldstatevalue == 'INSUFFICIENT_DATA':
         print(f"Alarm {alarm_name} has state INSUFFICIENT_DATA, not sending notification.")
@@ -168,6 +200,9 @@ def process_cloudwatch_alarm(record_timestamp, record_message):
     resource  = record_message.get("Trigger", {}).get("Namespace", "Unknown")
     region    = record_message.get("Region", "Unknown")
     alarm_arn = record_message.get("AlarmArn", "Unknown")
+
+    alarm_region = alarm_arn.split(":")[3]
+    alarm_link = f"https://{alarm_region}.console.aws.amazon.com/cloudwatch/home?region={alarm_region}#alarmsV2:alarm/{requests.utils.quote(alarm_name, safe='')}"
 
     tags = get_alarm_tags(alarm_arn)
     alarm_tags = get_alarm_metadata(tags)
@@ -182,13 +217,14 @@ def process_cloudwatch_alarm(record_timestamp, record_message):
     service_name = alarm_tags.get("alarm-service-name", "unknown")
 
     clean_alarm_name = '-'.join(record_message['AlarmName'].split('-')[1:])
-    alarm_name_parts = alarm_name.split('-')
-    metric = alarm_name_parts[0]
+    display_alarm_name = clean_alarm_name if level != "unknown" else alarm_name
+    
     reason = newstatereason.split(':')[0]
     datapoints = extract_datapoints(newstatereason)
 
     event_text = {
         'Level' : level,
+        'Account ID' : account_id,
         'Region' : region,
         'Resource' : resource,
         'Service Name' : service_name,
@@ -197,11 +233,12 @@ def process_cloudwatch_alarm(record_timestamp, record_message):
         'Alert Threshold' : threshold,
         'Datapoints' : datapoints,
         'State Change': f"{oldstatevalue} -> {newstatevalue}",
+        'Link' : alarm_link,
         **remaining_tags
     }
 
     # BUILD VARIABLES
-    title = f"{record_timestamp} | {newstatevalue} - {clean_alarm_name}"
+    title = f"{record_timestamp} | {newstatevalue} - {display_alarm_name}"
     message = event_text
 
     # LOG FROM LAMBDA
