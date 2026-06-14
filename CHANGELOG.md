@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/compare/v1.4.0...v1.4.1) (2026-06-14)
+
+
+### Bug Fixes
+
+* **lambda:** add multiple embeds for long discord messages ([#25](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/issues/25)) ([0e3a14e](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/commit/0e3a14e4b8fb2e6c129d8abccac76ff535a68171))
+
 ## [1.4.0](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/compare/v1.3.0...v1.4.0) (2026-06-05)
 
 
