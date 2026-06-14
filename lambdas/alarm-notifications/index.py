@@ -24,30 +24,39 @@ def send_discord_message(discord_webhook_url, title, message, color):
     lines = []
     link = None
     space_length = 21
-    min_line_width = 120
     for key, value in message.items():
         if key == 'Link':
             link = value
             continue
         line = f"{key}:{' ' * (space_length - len(key))}{value}"
         lines.append(line)
-    
-    max_width = max(max((len(l) for l in lines), default=0), min_line_width)
-    lines = [line.ljust(max_width) for line in lines]
     message_text = "```\n" + "\n".join(lines) + "\n```"
 
     if link:
         message_text += f"\n🔗 [View Alarm]({link})"
 
-    payload = {
-        "embeds": [
-            {
-                "title": title,
-                "description": message_text,
-                "color": color
-            }
-        ]
-    }
+    if len(message_text) > 4096:
+        mid = message_text.rfind("\n", 0, 4090)
+        part1 = message_text[:mid] + "\n```"
+        part2 = "```\n" + message_text[mid+1:]
+        if part2.startswith("```\n```\n"):
+            part2 = "```\n" + part2[8:]
+        payload = {
+            "embeds": [
+                {"title": title, "description": part1, "color": color},
+                {"description": part2, "color": color}
+            ]
+        }
+    else:
+        payload = {
+            "embeds": [
+                {
+                    "title": title,
+                    "description": message_text,
+                    "color": color
+                }
+            ]
+        }
     headers = {'Content-Type': 'application/json'}
     response = requests.post(discord_webhook_url, data=json.dumps(payload), headers=headers)
     if response.status_code != 204:
