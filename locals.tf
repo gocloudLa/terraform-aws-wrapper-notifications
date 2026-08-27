@@ -5,4 +5,10 @@ locals {
     local.notifications_enable == 1 &&
     try(var.notifications_parameters.sns_topic_arn, "") == ""
   ) ? 1 : 0
+
+  eventbridge_rules = (
+    local.notifications_enable == 1
+    ? try(var.notifications_parameters.eventbridge_rules, {})
+    : {}
+  )
 }

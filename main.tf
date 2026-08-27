@@ -151,3 +151,38 @@ resource "aws_sns_topic_policy" "services" {
     ]
   })
 }
+
+/*----------------------------------------------------------------------*/
+/* EventBridge Rules → Alarm Notifications Lambda                       */
+/*----------------------------------------------------------------------*/
+
+resource "aws_cloudwatch_event_rule" "alarm_notifications" {
+  for_each = local.eventbridge_rules
+
+  name           = try(each.value.name, "${local.common_name}-${each.key}")
+  description    = try(each.value.description, "EventBridge rule: ${each.key}")
+  event_bus_name = try(each.value.event_bus_name, local.default_event_bus_name)
+  event_pattern  = each.value.event_pattern
+
+  tags = merge(local.common_tags, try(var.notifications_parameters.tags, var.notifications_defaults.tags, null))
+}
+
+resource "aws_cloudwatch_event_target" "alarm_notifications" {
+  for_each = local.eventbridge_rules
+
+  rule           = aws_cloudwatch_event_rule.alarm_notifications[each.key].name
+  event_bus_name = try(each.value.event_bus_name, local.default_event_bus_name)
+  target_id      = "${local.common_name}-alarm-notifications"
+  arn            = module.lambda_alarm_notifications[0].lambda_function_arn
+}
+
+resource "aws_lambda_permission" "eventbridge_alarm_notifications" {
+  for_each = local.eventbridge_rules
+
+  statement_id  = "AllowExecutionFromEventBridge-${each.key}"
+  action        = "lambda:InvokeFunction"
+  function_name = module.lambda_alarm_notifications[0].lambda_function_name
+  principal     = "events.amazonaws.com"
+  source_arn    = aws_cloudwatch_event_rule.alarm_notifications[each.key].arn
+}
+
