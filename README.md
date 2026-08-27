@@ -14,6 +14,8 @@ The Terraform Wrapper for Notifications provides the implementation of two lambd
 
 - 🚨 [Alarm Notifications](#alarm-notifications) - Receives CloudWatch alarms and various AWS events, then sends formatted notifications
 
+- 🔔 [EventBridge Rules](#eventbridge-rules) - Define custom EventBridge rules to route events directly to the alarm-notifications Lambda
+
 
 
 ### 🔗 External Modules
@@ -37,6 +39,20 @@ notifications_parameters = {
   alarms_teams_webhook_url        = ""
 
   # sns_topic_arn = ""
+
+  # EVENTBRIDGE RULES (optional)
+  eventbridge_rules = {
+    ecs_and_health = {
+      name        = "my-project-health-rule"
+      description = "ECS events and AWS Health events"
+      event_pattern = jsonencode({
+        "$or" = [
+          { source = ["aws.ecs"] },
+          { source = ["aws.health"], "detail-type" = ["AWS Health Event"] }
+        ]
+      })
+    }
+  }
 }
 ```
 
@@ -106,18 +122,78 @@ module "notifications" {
 </details>
 
 
+### EventBridge Rules
+Define custom EventBridge rules that route events directly to the alarm-notifications Lambda function without going through SNS.
+This is useful for events that are natively emitted to EventBridge (e.g., ECS task state changes, AWS Health events) and don't require an SNS topic intermediary.
+
+Each rule creates:
+- An `aws_cloudwatch_event_rule` with the specified event pattern
+- An `aws_cloudwatch_event_target` pointing to the alarm-notifications Lambda
+- An `aws_lambda_permission` allowing EventBridge to invoke the Lambda
+
+The rules map accepts the following attributes per entry:
+| Attribute | Description | Required |
+|-----------|-------------|----------|
+| `event_pattern` | JSON-encoded EventBridge event pattern | yes |
+| `name` | Custom name for the rule (defaults to `<prefix>-<key>`) | no |
+| `description` | Description of the rule | no |
+| `event_bus_name` | Event bus to attach the rule to (defaults to `default`) | no |
+
+
+<details><summary>Configuration Code</summary>
+
+```hcl
+module "notifications" {
+  source = "gocloudLa/wrapper-notifications/aws"
+  
+  notifications_parameters = {
+    enable = true
+
+    alarms_discord_webhook_url = var.alarms_discord_webhook_url
+    alarms_teams_webhook_url   = var.alarms_teams_webhook_url
+
+    eventbridge_rules = {
+      ecs_and_health = {
+        name        = "${local.common_name}-health-rule"
+        description = "ECS events and AWS Health events"
+        event_pattern = jsonencode({
+          "$or" = [
+            { source = ["aws.ecs"] },
+            { source = ["aws.health"], "detail-type" = ["AWS Health Event"] }
+          ]
+        })
+      }
+
+      guardduty = {
+        name        = "${local.common_name}-guardduty-rule"
+        description = "GuardDuty findings"
+        event_pattern = jsonencode({
+          source      = ["aws.guardduty"]
+          detail-type = ["GuardDuty Finding"]
+        })
+      }
+    }
+  }
+}
+```
+
+
+</details>
+
+
 
 
 ## 📑 Inputs
-| Name                              | Description                                       | Type     | Default  | Required |
-| --------------------------------- | ------------------------------------------------- | -------- | -------- | -------- |
-| enable                            | Controls the creation of services                 | `bool`   | `"true"` | no       |
-| notifications_discord_webhook_url | Discord Webhook endpoint for log notifications    | `string` | `""`     | no       |
-| alarms_discord_webhook_url        | Discord Webhook endpoint for alarm notifications  | `string` | `""`     | no       |
-| notifications_teams_webhook_url   | Teams Webhook endpoint for log notifications      | `string` | `""`     | no       |
-| alarms_teams_webhook_url          | Teams Webhook endpoint for alarm notifications    | `string` | `""`     | no       |
-| sns_topic_arn                     | ARN of an existing SNS Topic for sending messages | `string` | `""`     | no       |
-| tags                              | A map of tags to assign to resources.             | `map`    | `{}`     | no       |
+| Name                              | Description                                                                | Type          | Default  | Required |
+| --------------------------------- | -------------------------------------------------------------------------- | ------------- | -------- | -------- |
+| enable                            | Controls the creation of services                                          | `bool`        | `"true"` | no       |
+| notifications_discord_webhook_url | Discord Webhook endpoint for log notifications                             | `string`      | `""`     | no       |
+| alarms_discord_webhook_url        | Discord Webhook endpoint for alarm notifications                           | `string`      | `""`     | no       |
+| notifications_teams_webhook_url   | Teams Webhook endpoint for log notifications                               | `string`      | `""`     | no       |
+| alarms_teams_webhook_url          | Teams Webhook endpoint for alarm notifications                             | `string`      | `""`     | no       |
+| sns_topic_arn                     | ARN of an existing SNS Topic for sending messages                          | `string`      | `""`     | no       |
+| eventbridge_rules                 | Map of EventBridge rules to route events to the alarm-notifications Lambda | `map(object)` | `{}`     | no       |
+| tags                              | A map of tags to assign to resources.                                      | `map`         | `{}`     | no       |
 
 
 
