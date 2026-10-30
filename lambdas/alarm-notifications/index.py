@@ -317,28 +317,8 @@ def process_eventbridge_message(record_timestamp, record_message):
         }
 
     elif source == 'aws.health':
-
-        level = record_message['detail']['eventTypeCategory']
-        resource = record_message['detail']['service']
-        eventTypeCode = record_message['detail']['eventTypeCode'] 
-        reason = record_message['detail']['eventDescription'][0]['latestDescription']
-        account_id = record_message['account']
-
-        event_text = {
-            'Level' : level,
-            'Account ID' : account_id,
-            'Region' : region,
-            'Resource' : resource,
-            'Event Type Code' : eventTypeCode,
-            'Reason' : reason
-        }
-
-        title = f"{level} - {resource} | {time_stamp}"
-        return {
-            'title': title,
-            'message': event_text,
-            'color': get_color(level)
-        }
+        print(f"Health event {record_message['detail'].get('eventTypeCode')} ignored, handled by notifications lambda.")
+        return None
 
     else:
         title = f"Unknown EventBridge source: {source}"

@@ -69,12 +69,72 @@ def send_teams_message(teams_webhook_url, title, message, color):
     else:
         print("Teams message sent successfully.")
 
+def process_health_event(record_timestamp, record_message):
+
+  level = record_message['detail']['eventTypeCategory']
+  resource = record_message['detail']['service']
+  event_type_code = record_message['detail']['eventTypeCode']
+  reason = record_message['detail']['eventDescription'][0]['latestDescription']
+  account_id = record_message['account']
+  region = record_message['region']
+
+  event_text = {
+    'Level' : level,
+    'Account ID' : account_id,
+    'Region' : region,
+    'Resource' : resource,
+    'Event Type Code' : event_type_code,
+    'Reason' : reason
+  }
+
+  space_length = 21
+  lines = [f"{key}:{' ' * (space_length - len(key))}{value}" for key, value in event_text.items()]
+
+  title = f"{level} - {resource} | {record_timestamp}"
+  message = "\n".join(lines)
+
+  if level == 'scheduledChange':
+    color = 16776960  # Yellow color
+  elif level == 'accountNotification':
+    color = 65280  # Green color
+  else:
+    color = 16711680  # Red color
+
+  return title, message, color
+
+def process_sns_records(event):
+  for record in event['Records']:
+    record_timestamp = record['Sns']['Timestamp']
+    try:
+      record_message = json.loads(record['Sns']['Message'])
+    except json.JSONDecodeError:
+      print(f"Non-JSON SNS message ignored: {record['Sns']['Message']}")
+      continue
+
+    if not (isinstance(record_message, dict) and record_message.get('source') == 'aws.health'):
+      print(f"SNS message ignored, not an aws.health event: {record_message}")
+      continue
+
+    title, message, color = process_health_event(record_timestamp, record_message)
+
+    print (f"{title}")
+    print (f"{message}")
+
+    if discord_webhook_url:
+      send_discord_message(discord_webhook_url, title, f"```\n{message[:4080]}\n```", color)
+    if teams_webhook_url:
+      send_teams_message(teams_webhook_url, title, message, color)
+
 def lambda_handler(event, context):
   # Message Decode
   if log_level == 'DEBUG':
     print("Event Raw:")
     print(event)
-    
+
+  if 'Records' in event:
+    process_sns_records(event)
+    return
+
   input_data = event['awslogs']['data']
   payload = base64.b64decode(input_data)
   result = zlib.decompress(payload, 16 + zlib.MAX_WBITS)
