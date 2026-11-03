@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.2](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/compare/v1.4.1...v1.4.2) (2026-11-03)
+
+
+### Bug Fixes
+
+* **module:** change health events to notification lambda processing ([#28](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/issues/28)) ([c9a69ab](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/commit/c9a69ab2dfa1b83895b47d76fabf5f8add5e5dc2))
+
 ## [1.4.1](https://github.com/gocloudLa/terraform-aws-wrapper-notifications/compare/v1.4.0...v1.4.1) (2026-06-14)
 
 
