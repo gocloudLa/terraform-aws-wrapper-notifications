@@ -47,6 +47,7 @@ notifications_parameters = {
 Processes CloudWatch log events received via subscription filters and sends formatted notifications to Discord and/or Teams channels. 
 Supports both JSON structured logs and plain text logs with automatic parsing and color-coded severity levels (ERROR, WARN, DEBUG, INFO).
 Extracts additional metadata like source files and stack traces when available.
+Also handles AWS Health events, formatting account notifications, scheduled changes and issues.
 
 
 <details><summary>Configuration Code</summary>
@@ -74,7 +75,7 @@ module "notifications" {
 ### Alarm Notifications
 Processes multiple types of AWS events and sends formatted notifications to Discord and/or Teams:
 - **CloudWatch Alarms**: Processes alarm state changes with custom tags and metadata
-- **EventBridge Events**: Handles ECS task state changes and AWS Health events
+- **EventBridge Events**: Handles ECS task state changes
 - **Budget Alerts**: Processes AWS Budget notifications with spending thresholds
 - **SES Events**: Handles email bounce, complaint, and delivery notifications
 - **Cost Anomaly Detection**: Processes cost anomaly alerts with impact and root cause details
